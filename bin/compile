@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+indent() {
+    sed -u 's/^/       /'
+}
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+SLUGCLEANUP=$(cat "${ENV_DIR}/SLUGCLEANUP")
+
+if [[ -z "${SLUGCLEANUP}" ]]; then
+    echo "SLUGCLEANUP was not set. Aborting" | indent
+    exit 1
+fi
+
+cp "${BUILD_DIR}/${SLUGCLEANUP}" "${BUILD_DIR}/.slugcleanup"
+
+if ! [ $? ]; then
+    echo "FAILED to copy a .slugcleanup" | indent
+    exit 1
+fi
+
+echo "Copied ${SLUGCLEANUP} as .slugcleanup successfully" | indent

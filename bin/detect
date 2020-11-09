@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Multi-slugcleanup"
+exit 0
